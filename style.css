@@ -283,4 +283,9 @@ body {
   .header {
     display: none;
   }
+
+  .show__imgs,
+  .slider__img > img {
+    height: 25rem;
+  }
 }
