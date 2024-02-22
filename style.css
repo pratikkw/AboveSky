@@ -82,6 +82,7 @@ body {
   z-index: 10;
   background-color: transparent;
   padding: var(--header-padding);
+  transition: transform 0.3s;
 }
 
 .header__container {
@@ -112,13 +113,53 @@ body {
   transition: width 0.4s;
 }
 
-.link:hover::after {
-  width: 100%;
-}
-
 .link--mdf {
   font-size: 1.5rem;
   font-weight: 700;
+}
+
+.header__menu {
+  display: none;
+  position: fixed;
+  inset: 2rem 2.5rem auto auto;
+  z-index: 50;
+}
+
+.menu {
+  height: 3px;
+  width: 1.75rem;
+  background-color: var(--menu-clr);
+  display: block;
+
+  position: relative;
+  cursor: pointer;
+
+  --menu-clr: #000;
+  --rotate-aft: 0;
+  --rotate-bef: 0;
+  --top-aft: 8px;
+  --top-bef: -8px;
+}
+
+.menu::after,
+.menu::before {
+  position: absolute;
+  content: "";
+  background: black;
+  height: inherit;
+  width: inherit;
+  left: 0;
+  transition: transform 0.3s;
+}
+
+.menu::after {
+  top: var(--top-aft);
+  transform: rotate(var(--rotate-aft));
+}
+
+.menu::before {
+  top: var(--top-bef);
+  transform: rotate(var(--rotate-bef));
 }
 
 /* SECTION INTRO */
@@ -249,6 +290,12 @@ body {
 }
 /* ------------------- */
 
+@media only screen and (hover: hover) {
+  .link:hover::after {
+    width: 100%;
+  }
+}
+
 @media only screen and (max-width: 68.75rem) {
   .section__intro-container {
     grid-template-columns: 1fr;
@@ -275,17 +322,67 @@ body {
 }
 
 @media only screen and (max-width: 43.75rem) {
+  :root {
+    --links-gap: 2.75rem;
+  }
+
   .text,
   .about__text {
     padding: 3rem 2rem;
   }
 
   .header {
-    display: none;
+    background-color: var(--white-clr);
+    transform: translateX(100%);
+  }
+
+  .header__container {
+    height: 100vh;
+    flex-direction: column;
+  }
+
+  .links {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .link {
+    font-size: 2rem;
+  }
+
+  .link--mdf {
+    font-size: 2rem;
+  }
+
+  .header__menu {
+    display: block;
   }
 
   .show__imgs,
   .slider__img > img {
     height: 25rem;
   }
+}
+
+@media only screen and (max-width: 31.25rem) {
+  :root {
+    --links-gap: 2.5rem;
+  }
+
+  .link,
+  .link--mdf {
+    font-size: 1.75rem;
+  }
+}
+
+.slider--active {
+  transform: translateX(0%);
+}
+
+.menu--active {
+  --menu-clr: transparent;
+  --rotate-aft: 45deg;
+  --rotate-bef: -45deg;
+  --top-aft: 0px;
+  --top-bef: 0px;
 }

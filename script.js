@@ -1,5 +1,15 @@
 "use strict";
 
+// SLIDER
+const header = document.querySelector(".header");
+const menuBar = document.querySelector(".header__menu");
+const menu = document.querySelector(".menu");
+
+menuBar.addEventListener("click", function () {
+  menu.classList.toggle("menu--active");
+  header.classList.toggle("slider--active");
+});
+
 // Navigation
 const header_container = document.querySelector(".header__container");
 const logo = document.querySelector(".logo__box a");
@@ -44,7 +54,6 @@ rightBtn.addEventListener("click", function () {
     curSlide++;
   }
 
-  console.log(curSlide);
   moveSlide(curSlide);
 });
 
@@ -54,6 +63,6 @@ leftBtn.addEventListener("click", function () {
   } else {
     curSlide--;
   }
-  console.log(curSlide);
+
   moveSlide(curSlide);
 });
